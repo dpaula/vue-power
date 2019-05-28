@@ -1,16 +1,26 @@
 <template>
 <div class="painel">
-    <h2 class="painel-titulo">{{ titulo }}</h2>
-    <!-- slot define que nesta tag será recebida o conteúdo do componente -->
-    <slot class="painel-conteudo">
-    </slot>
+    <!-- @ é mesma coisa que v-on que define um evento, neste caso está sendo definido o evento de duplo clique -->
+    <h2 class="painel-titulo" @dblclick="visivel = !visivel">{{ titulo }}</h2>
+    <!-- v-show define se será ou não exibida a tag -->
+    <div class="painel-conteudo" v-show="visivel">
+        <!-- slot define que nesta tag será recebida o conteúdo do componente -->
+        <slot>
+        </slot>
+    </div>
 </div>
 </template>
 
 <script>
 export default {
     //definindo as propriedades que serão passados para este componente
-    props: ['titulo']
+    props: ['titulo'],
+
+    data() {
+        return {
+            visivel: true
+        }
+    },
 };
 </script>
 
