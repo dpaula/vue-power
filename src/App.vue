@@ -11,15 +11,9 @@
     <div>
       <ul class="lista-fotos">
         <li class="lista-fotos-item" v-for="foto of fotos" :key="foto.id">
-          
-          <div class="painel">
-            <h2 class="painel-titulo">{{ foto.titulo }}</h2>
-            <div class="painel-conteudo">
-
-                <img class="imagem-responsiva" :src="foto.url" :alt="foto.titulo">
-            </div>
-          </div>
-
+          <meu-painel :titulo="foto.titulo">
+            <img class="imagem-responsiva" :src="foto.url" :alt="foto.titulo">
+          </meu-painel>
         </li>
       </ul>
     </div>
@@ -27,7 +21,14 @@
 </template>
 
 <script>
+import Painel from "./components/shared/painel/Painel";
+
 export default {
+  // registrando os componentes que serão usados
+  components: {
+    "meu-painel": Painel
+  },
+
   data() {
     return {
       titulo: "App Power",
@@ -67,29 +68,6 @@ export default {
 }
 
 .imagem-responsiva {
-    width: 100%;
+  width: 100%;
 }
-
-/* estilo do painel */ 
-
-   .painel {
-    padding: 0 auto;
-    border: solid 2px grey;
-    display: inline-block;
-    margin: 5px;
-    box-shadow: 5px 5px 10px grey;
-    width: 200px;
-    height: 100%;
-    vertical-align: top;
-    text-align: center;
-  }
-
-  .painel .painel-titulo {
-    text-align: center;
-    border: solid 2px;
-    background: lightblue;
-    margin: 0 0 15px 0;
-    padding: 10px;
-    text-transform: uppercase;
-  }
 </style>
