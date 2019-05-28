@@ -2,12 +2,15 @@
 <div class="painel">
     <!-- @ é mesma coisa que v-on que define um evento, neste caso está sendo definido o evento de duplo clique -->
     <h2 class="painel-titulo" @dblclick="visivel = !visivel">{{ titulo }}</h2>
-    <!-- v-show define se será ou não exibida a tag -->
-    <div class="painel-conteudo" v-show="visivel">
-        <!-- slot define que nesta tag será recebida o conteúdo do componente -->
-        <slot>
-        </slot>
-    </div>
+    <transition name="painel-fade">
+        <!-- v-show define se será ou não exibida a tag -->
+        <div class="painel-conteudo" v-show="visivel">
+            <!-- slot define que nesta tag será recebida o conteúdo do componente -->
+            <slot>
+            </slot>
+        </div>
+
+    </transition>
 </div>
 </template>
 
@@ -51,4 +54,13 @@ export default {
 * {
     box-shadow: 5px 5px 5px black;
 }
+
+.painel-fade-enter, .painel-fade-leave-active {
+    opacity: 0;
+}
+
+.painel-fade-enter-active, .painel-fade-leave-active {
+    transition: opacity .7s;
+}
+
 </style>
