@@ -7,6 +7,10 @@
     <div class="titulo">
       <h1>{{ titulo }}</h1>
     </div>
+    <div>
+      <input type="search" class="filtro" v-on:input="filtro=$event.target.value" placeholder="Insira sua pesquisa pelo título">
+      {{filtro}}
+    </div>
     <!-- usando v-bind para acesso direto a um objeto dentro dos dados -->
     <div>
       <ul class="lista-fotos">
@@ -32,7 +36,8 @@ export default {
   data() {
     return {
       titulo: "App Power",
-      fotos: []
+      fotos: [],
+      filtro: ''
     };
   },
 
@@ -69,5 +74,10 @@ export default {
 
 .imagem-responsiva {
   width: 100%;
+}
+
+.filtro {
+    display: block;
+    width: 100%;
 }
 </style>
