@@ -19,19 +19,19 @@ export default {
     data() {
         return {
             titulo: "App Power",
-            fotos: [{
-                    id: 1,
-                    url: "http://www.sebrae.com.br/Sebrae/Portal%20Sebrae/UFs/AP/Imagens/tecnologia.png",
-                    titulo: "Tecnologia"
-                },
-                {
-                    id: 2,
-                    url: "http://grupoatta.com.br/site/wp-content/uploads/2016/09/politico.jpg",
-                    titulo: "Politica"
-                }
-            ]
+            fotos: []
         };
-    }
+    }, 
+
+    created () {
+
+        // usando método o vue-resource para dar um get via http
+        this.$http.get('http://localhost:3000/v1/fotos')
+            // como retorna uma promise, busco resposta, que é um json
+            .then(res => res.json())
+            // como ainda retorna uma promise, busco as fotos, imprimindo no log caso der erro
+            .then(fotos => this.fotos = fotos, err => console.log(err));
+    },
 };
 </script>
 
