@@ -1,39 +1,61 @@
 <!-- // Este é um SFT (Single File Template) que é um arquivo vue que define 3 partes: template, script e style -->
 
 <template>
-<div>
+  <div class="corpo">
     <!-- usando interpolação para acesso dos dados, neste caso o titulo -->
-    <h1>{{ titulo }}</h1>
+    <div class="titulo">
+      <h1>{{ titulo }}</h1>
+    </div>
     <!-- usando v-bind para acesso direto a um objeto dentro dos dados -->
-
-    <ul>
-        <li v-for="foto of fotos" :key="foto.id">
-            <img :src="foto.url" :alt="foto.titulo">
-      </li>
-    </ul>
-</div>
+    <div >
+      <ul class="lista-fotos">
+        <li class="lista-fotos-item" v-for="foto of fotos" :key="foto.id">
+          <img :src="foto.url" :alt="foto.titulo">
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            titulo: "App Power",
-            fotos: []
-        };
-    }, 
+  data() {
+    return {
+      titulo: "App Power",
+      fotos: []
+    };
+  },
 
-    created () {
-
-        // usando método o vue-resource para dar um get via http
-        this.$http.get('http://localhost:3000/v1/fotos')
-            // como retorna uma promise, busco resposta, que é um json
-            .then(res => res.json())
-            // como ainda retorna uma promise, busco as fotos, imprimindo no log caso der erro
-            .then(fotos => this.fotos = fotos, err => console.log(err));
-    },
+  created() {
+    // usando método o vue-resource para dar um get via http
+    this.$http
+      .get("http://localhost:3000/v1/fotos")
+      // como retorna uma promise, busco resposta, que é um json
+      .then(res => res.json())
+      // como ainda retorna uma promise, busco as fotos, imprimindo no log caso der erro
+      .then(fotos => (this.fotos = fotos), err => console.log(err));
+  }
 };
 </script>
 
 <style>
+
+    .corpo {
+        font-family: Helvetica, sans-serif;
+        width: 96%;
+        margin: 0 auto;
+    }
+
+    .titulo {
+        text-align: center;
+    }
+
+    .lista-fotos {
+        list-style: none;
+    }
+
+    .lista-fotos .lista-fotos-item {
+        display: inline-block;
+    }
+
 </style>
