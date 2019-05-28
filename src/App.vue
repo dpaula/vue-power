@@ -9,12 +9,11 @@
     </div>
     <div>
       <input type="search" class="filtro" v-on:input="filtro=$event.target.value" placeholder="Insira sua pesquisa pelo título">
-      {{filtro}}
     </div>
     <!-- usando v-bind para acesso direto a um objeto dentro dos dados -->
     <div>
       <ul class="lista-fotos">
-        <li class="lista-fotos-item" v-for="foto of fotos" :key="foto.id">
+        <li class="lista-fotos-item" v-for="foto of fotosComFiltro" :key="foto.id">
           <meu-painel :titulo="foto.titulo">
             <img class="imagem-responsiva" :src="foto.url" :alt="foto.titulo">
           </meu-painel>
@@ -39,6 +38,21 @@ export default {
       fotos: [],
       filtro: ''
     };
+  },
+
+  // funções de propriedades cacheadas, que são atualizadas conforme suas dependências, toda vez q fotos for atualizada, a propriedade que a usa será atualizada também
+  computed: {
+      fotosComFiltro() {
+
+          if(this.filtro){
+
+              //definindo uma expressão regular para o filtro, marcando como ignore case
+              let exp = new RegExp(this.filtro.trim(), 'i');
+              //retornando uma lista, conforme filtrada pelo seu título, que neste caso tem q dar mach com o título de cada foto
+              return this.fotos.filter(foto => exp.test(foto.titulo));
+          }
+            return this.fotos;
+      }
   },
 
   created() {
