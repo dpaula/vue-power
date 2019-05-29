@@ -57,9 +57,8 @@ export default {
 
     gravar() {
       
-      console.log('Gravando foto na base!!!!!!');
-
-      this.foto = new Foto();
+      this.$http.post("http://localhost:3000/v1/fotos", this.foto)
+        .then(() => this.foto = new Foto(), err => console.log(err));
 
     }
   },
