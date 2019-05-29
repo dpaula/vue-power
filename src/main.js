@@ -8,6 +8,8 @@ import VueRouter from 'vue-router';
 // usar chaves para importar um constante exportada
 import { routes } from "./routes";
 
+import './directives/Transform';
+
 // registrando o uso da dependência
 Vue.use(VueResource);
 Vue.use(VueRouter);

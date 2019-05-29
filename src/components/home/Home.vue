@@ -17,7 +17,7 @@
       <ul class="lista-fotos">
         <li class="lista-fotos-item" v-for="foto of fotosComFiltro" :key="foto.id">
           <meu-painel :titulo="foto.titulo">
-            <imagem-responsiva :url="foto.url" :titulo="foto.titulo"/>
+            <imagem-responsiva v-meu-transform :url="foto.url" :titulo="foto.titulo"/>
             <!-- na passagem de parametros para as propriedades do componente, usa se ":" quando não quer passar apenas string -->
             <meu-botao
               tipo="button"
