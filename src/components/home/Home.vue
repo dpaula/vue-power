@@ -3,6 +3,9 @@
     <!-- usando interpolação para acesso dos dados, neste caso o titulo -->
     <div class="titulo">
       <h1>{{ titulo }}</h1>
+      <div class="mensagem-aviso">
+        <p v-show="mensagem" class="mensagem-aviso" >{{mensagem}}</p>
+      </div>
     </div>
     <div>
       <input
@@ -50,13 +53,23 @@ export default {
     return {
       titulo: "App Power",
       fotos: [],
-      filtro: ""
+      filtro: "",
+      mensagem: ''
     };
   },
 
   methods: {
     remove(foto) {
-      alert(`A foto ${foto.titulo} será removida!!`);
+     
+     this.$http.delete(`http://localhost:3000/v1/fotos/${foto._id}`)
+     .then(() => this.mensagem = 'Foto removida com sucesso!!', err => {
+       console.log(err);
+       this.mensagem = 'Não foi possível remover a foto';
+     });
+
+     alert(`A foto ${foto.titulo} será removida!!`);
+
+
     }
   },
 
@@ -88,6 +101,13 @@ export default {
 <style>
 .titulo {
   text-align: center;
+}
+
+.mensagem-aviso {
+  text-align: center;
+  color: brown;
+  font-weight: bold;
+  background-color: wheat
 }
 
 .lista-fotos {
