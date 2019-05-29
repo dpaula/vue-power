@@ -3,9 +3,7 @@
 <template>
   <div class="corpo">
 
-    <meu-menu :rotas="routes">
-    </meu-menu>
-
+    <meu-menu :rotas="routes"/>
     <router-view></router-view>
   </div>
 </template>
