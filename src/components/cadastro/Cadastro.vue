@@ -7,13 +7,15 @@
     <form @submit.prevent="gravar()">
       <div class="controle">
         <label for="titulo">TÍTULO</label>
-        <input id="titulo" v-model="foto.titulo" autocomplete="off">
+        <input id="titulo" v-model.lazy="foto.titulo" autocomplete="off">
       </div>
 
       <div class="controle">
         <label for="url">URL</label>  
-        <input id="url" v-model="foto.url" autocomplete="off">
-        <imagem-responsiva/>
+        <!-- incluido modificador lazy para so alterar a propriedade quando sair do foco do input -->
+        <input id="url" v-model.lazy="foto.url" autocomplete="off">
+        <!-- neste caso com o v-show, a imagem só será carregada quando tiver valor da url -->
+        <imagem-responsiva v-show="foto.url" :url="foto.url" :titulo="foto.titulo"/>
       </div>
 
       <div class="controle">
