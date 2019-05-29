@@ -2,13 +2,9 @@
 
 <template>
   <div class="corpo">
-    <nav>
-      <ul>
-        <li v-for="route in routes" :key="route.id">
-          <router-link :to="route.path ? route.path : '/'">{{ route.titulo}}</router-link>
-        </li>
-      </ul>
-    </nav>
+
+    <meu-menu :rotas="routes">
+    </meu-menu>
 
     <router-view></router-view>
   </div>
@@ -17,11 +13,17 @@
 <script>
 import { routes } from "./routes";
 
+import Menu from "./components/shared/menu/Menu.vue"
+
 export default {
   data() {
     return {
       routes
     };
+  }, 
+
+  components: {
+      "meu-menu": Menu
   }
 };
 </script>
