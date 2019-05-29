@@ -4,21 +4,21 @@
     <h1 class="centralizado">Cadastro</h1>
     <h2 class="centralizado"></h2>
 
-    <form>
+    <form @submit.prevent="gravar()">
       <div class="controle">
         <label for="titulo">TÍTULO</label>
-        <input id="titulo" autocomplete="off">
+        <input id="titulo" v-model="foto.titulo" autocomplete="off">
       </div>
 
       <div class="controle">
-        <label for="url">URL</label>
-        <input id="url" autocomplete="off">
+        <label for="url">URL</label>  
+        <input id="url" v-model="foto.url" autocomplete="off">
         <imagem-responsiva/>
       </div>
 
       <div class="controle">
         <label for="descricao">DESCRIÇÃO</label>
-        <textarea id="descricao" autocomplete="off"></textarea>
+        <textarea id="descricao" v-model="foto.descricao" autocomplete="off"></textarea>
       </div>
 
       <div class="centralizado">
@@ -41,7 +41,30 @@ export default {
 
     'imagem-responsiva': ImagemResponsiva, 
     'meu-botao': Botao
-  }
+  },
+
+  data() {
+    return {
+      foto: {
+        titulo: '',
+        url: '',
+        descricao: ''
+      }
+    }
+  },
+
+  methods: {
+
+    gravar() {
+      
+      console.log('Gravando foto na base!!!!!!');
+
+      this.foto.titulo = '';
+      this.foto.url = '';
+      this.foto.descricao = '';
+
+    }
+  },
 }
 
 </script>
