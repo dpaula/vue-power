@@ -57,11 +57,18 @@ export default {
 
     gravar() {
       
-      this.$http.post("v1/fotos", this.foto)
+      this.resource
+        .save(this.foto)
         .then(() => this.foto = new Foto(), err => console.log(err));
 
     }
   },
+
+  created() {
+
+    //criando uma propriedade dinamicamente
+    this.resource = this.$resource('v1/fotos');
+  }
 }
 
 </script>

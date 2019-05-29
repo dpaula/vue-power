@@ -64,7 +64,10 @@ export default {
 
   methods: {
     remove(foto) {
-      this.$http.delete(`v1/fotos/${foto._id}`).then(
+
+      //definindo o id como chave que será associada ao _id
+      this.resource.delete({ id: foto._id })
+      .then(
         () => {
           this.mensagem = "Foto removida com sucesso!!";
 
@@ -94,13 +97,18 @@ export default {
   },
 
   created() {
-    // usando método o vue-resource para dar um get via http
-    this.$http
-      .get("v1/fotos")
+
+    //criando uma propriedade dinamicamente
+    //definindo meu end point para o recurso fotos, com o id que será usado como chave
+    this.resource = this.$resource('v1/fotos{/id}');
+
+    this.resource
+      .query()
       // como retorna uma promise, busco resposta, que é um json
       .then(res => res.json())
       // como ainda retorna uma promise, busco as fotos, imprimindo no log caso der erro
       .then(fotos => (this.fotos = fotos), err => console.log(err));
+
   }
 };
 </script>
