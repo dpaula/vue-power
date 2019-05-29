@@ -8,8 +8,8 @@ Vue.directive('meu-transform', {
     //metodo principal da diretiva
     bind(el, binding, vnode) {
 
-        //propriedades passadas para a diretiva
-        //v-meutransform="{ incremento: 20, animate: true }"
+        //modificadores passadas para a diretiva
+        //animate, reverse
 
         rotacionar(el, binding);
 
@@ -30,14 +30,20 @@ function rotacionar(el, binding) {
     el.addEventListener('dblclick', function () {
 
         // se retornar nada, atribui 90;
-        let incremento = binding.value.incremento || 90;
+        let incremento = binding.value || 90;
 
-        current += incremento;
+        //verifica se foi passado o modificador reverse (v-meu-transform.reverse)
+        if (binding.modifiers.reverse) {
+            current -= incremento;
+        } else {
+            current += incremento;
+        }
 
         // rotaciona em graus
         el.style.transform = `rotate(${current}deg)`;
 
-        if(binding.value.animate){
+        //verifica se foi passado o modificador animate (v-meu-transform.animate)
+        if (binding.modifiers.animate) {
             // a trasição da rotação leva meio segundo
             el.style.transition = 'transform 0.5s'
         }
