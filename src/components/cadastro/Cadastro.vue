@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 class="centralizado"></h2>
+        <h2 class="centralizado">CADASTRO</h2>
     </div>
 </template>
 

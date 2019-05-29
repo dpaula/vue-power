@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import Painel from "../components/shared/painel/Painel";
-import ImagemResponsiva from "../components/shared/imagem-responsiva/ImagemResponsiva";
+import Painel from "../shared/painel/Painel.vue";
+import ImagemResponsiva from "../shared/imagem-responsiva/ImagemResponsiva.vue";
 
 export default {
   // registrando os componentes que serão usados
