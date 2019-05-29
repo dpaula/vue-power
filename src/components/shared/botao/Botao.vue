@@ -33,6 +33,10 @@
                if(this.estilo == 'perigo'){
                    return 'botao-perigo'
                }
+              
+               if(this.estilo == 'salvar'){
+                   return 'botao-salvar'
+               }
 
                return 'botao-padrao'
            }
@@ -57,6 +61,11 @@
 
     .botao-padrao {
         background: darkcyan;
+        color: white;
+    }
+   
+    .botao-salvar {
+        background: blue;
         color: white;
     }
 </style>
