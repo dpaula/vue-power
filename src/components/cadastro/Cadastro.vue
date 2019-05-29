@@ -37,6 +37,8 @@
 import ImagemResponsiva from '../shared/imagem-responsiva/ImagemResponsiva.vue'
 import Botao from '../shared/botao/Botao.vue';
 
+import Foto from '../../domain/foto/Foto';
+
 export default {
 
   components: {
@@ -47,11 +49,7 @@ export default {
 
   data() {
     return {
-      foto: {
-        titulo: '',
-        url: '',
-        descricao: ''
-      }
+      foto: new Foto()
     }
   },
 
@@ -61,9 +59,7 @@ export default {
       
       console.log('Gravando foto na base!!!!!!');
 
-      this.foto.titulo = '';
-      this.foto.url = '';
-      this.foto.descricao = '';
+      this.foto = new Foto();
 
     }
   },
