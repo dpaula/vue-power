@@ -5,8 +5,15 @@
 </template>
 
 <script>
+
     export default {
-       props: [ 'tipo', 'rotulo', 'confirmacao', 'estilo'],
+
+       props: {
+            tipo: { required: true, type: String },
+            rotulo: { required: true, type: String },
+            confirmacao: { type: Boolean, default: false },
+            estilo: { type: String, default: 'padrao' }
+       },
 
        methods: {
            disparaAcao() {
