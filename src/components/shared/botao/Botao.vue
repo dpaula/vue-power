@@ -1,12 +1,35 @@
 <template>
     <div>
-        <button class="botao botao-perigo" :type="tipo">{{rotulo}}</button>
+        <button @click="disparaAcao()" class="botao" :class="estiloDoBotao" :type="tipo">{{rotulo}}</button>
     </div>
 </template>
 
 <script>
     export default {
-       props: [ 'tipo', 'rotulo']
+       props: [ 'tipo', 'rotulo', 'confirmacao', 'estilo'],
+
+       methods: {
+           disparaAcao() {
+               if(this.confirmacao){
+                   // apresenta uma mensagem de confirmação, caso a resposta for ok, entra no if
+                   if(confirm('Confirma operação?')) {
+                       // emite um novo evento @botaoAtivado, que o componente pai tem acesso
+                       this.$emit('botaoAtivado');
+                   }
+               }
+           }
+       },
+
+       computed: {
+           estiloDoBotao() {
+
+               if(this.estilo == 'perigo'){
+                   return 'botao-perigo'
+               }
+
+               return 'botao-padrao'
+           }
+       },
     }
 </script>
 
