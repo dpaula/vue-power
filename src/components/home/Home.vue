@@ -4,7 +4,7 @@
     <div class="titulo">
       <h1>{{ titulo }}</h1>
       <div class="mensagem-aviso">
-        <p v-show="mensagem" class="mensagem-aviso" >{{mensagem}}</p>
+        <p v-show="mensagem" class="mensagem-aviso">{{mensagem}}</p>
       </div>
     </div>
     <div>
@@ -20,7 +20,11 @@
       <ul class="lista-fotos">
         <li class="lista-fotos-item" v-for="foto of fotosComFiltro" :key="foto.id">
           <meu-painel :titulo="foto.titulo">
-            <imagem-responsiva v-meu-transform.animate.reverse="20" :url="foto.url" :titulo="foto.titulo"/>
+            <imagem-responsiva
+              v-meu-transform.animate.reverse="20"
+              :url="foto.url"
+              :titulo="foto.titulo"
+            />
             <!-- na passagem de parametros para as propriedades do componente, usa se ":" quando não quer passar apenas string -->
             <meu-botao
               tipo="button"
@@ -54,22 +58,25 @@ export default {
       titulo: "App Power",
       fotos: [],
       filtro: "",
-      mensagem: ''
+      mensagem: ""
     };
   },
 
   methods: {
     remove(foto) {
-     
-     this.$http.delete(`http://localhost:3000/v1/fotos/${foto._id}`)
-     .then(() => this.mensagem = 'Foto removida com sucesso!!', err => {
-       console.log(err);
-       this.mensagem = 'Não foi possível remover a foto';
-     });
+      this.$http.delete(`http://localhost:3000/v1/fotos/${foto._id}`).then(
+        () => {
+          this.mensagem = "Foto removida com sucesso!!";
 
-     alert(`A foto ${foto.titulo} será removida!!`);
-
-
+          // atualiza a lista de fotos, sem precisar revisitar o servidor
+          let indice = this.fotos.indexOf(foto);
+          this.fotos.splice(indice, 1);
+        },
+        err => {
+          console.log(err);
+          this.mensagem = "Não foi possível remover a foto";
+        }
+      );
     }
   },
 
@@ -107,7 +114,7 @@ export default {
   text-align: center;
   color: brown;
   font-weight: bold;
-  background-color: wheat
+  background-color: wheat;
 }
 
 .lista-fotos {
