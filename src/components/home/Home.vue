@@ -64,7 +64,7 @@ export default {
 
   methods: {
     remove(foto) {
-      this.$http.delete(`http://localhost:3000/v1/fotos/${foto._id}`).then(
+      this.$http.delete(`v1/fotos/${foto._id}`).then(
         () => {
           this.mensagem = "Foto removida com sucesso!!";
 
@@ -96,7 +96,7 @@ export default {
   created() {
     // usando método o vue-resource para dar um get via http
     this.$http
-      .get("http://localhost:3000/v1/fotos")
+      .get("v1/fotos")
       // como retorna uma promise, busco resposta, que é um json
       .then(res => res.json())
       // como ainda retorna uma promise, busco as fotos, imprimindo no log caso der erro

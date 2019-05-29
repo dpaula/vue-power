@@ -12,6 +12,8 @@ import './directives/Transform';
 
 // registrando o uso da dependência
 Vue.use(VueResource);
+// definindo a url base para as configurações do vue
+Vue.http.options.root = 'http://localhost:3000';
 Vue.use(VueRouter);
 
 // criando um roteador com auxilio do componente vue-router, usando as configurações das routers.js importada
