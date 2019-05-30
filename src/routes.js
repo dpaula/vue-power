@@ -1,4 +1,7 @@
-import Cadastro from './components/cadastro/Cadastro.vue'
+
+// carregando o componente assincronamente, somente quando a rota for acessada, pois neste caso será quebrado em outro bundle, evitando carregar tudo ao mesmo tempo
+const Cadastro = () => System.import('./components/cadastro/Cadastro.vue');
+
 import Home from './components/home/Home.vue'
 
 export const routes = [
