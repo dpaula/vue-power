@@ -4,6 +4,7 @@ import App from './App.vue'
 // importando a dependência vue-resource que já foi instalada e localizada no node_modules
 import VueResource from 'vue-resource';
 import VueRouter from 'vue-router';
+import VeeValidate from  'vee-validate';
 
 // usar chaves para importar um constante exportada
 import { routes } from "./routes";
@@ -18,6 +19,8 @@ Vue.use(VueRouter);
 
 // criando um roteador com auxilio do componente vue-router, usando as configurações das routers.js importada
 const router = new VueRouter({ routes });
+
+Vue.use(VeeValidate);
 
 new Vue({
   el: '#app',
