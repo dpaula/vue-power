@@ -12,13 +12,15 @@
     <form @submit.prevent="gravar()">
       <div class="controle">
         <label for="titulo">TÍTULO</label>
-        <input id="titulo" v-model.lazy="foto.titulo" autocomplete="off">
+        <input data-vv-as="Título" name="titulo" v-validate data-vv-rules="required|min:3|max:30" id="titulo" v-model="foto.titulo" autocomplete="off">
+        <span class="erro" v-show="errors.has('titulo')">{{errors.first('titulo')}}</span>
       </div>
 
       <div class="controle">
         <label for="url">URL</label>  
         <!-- incluido modificador lazy para so alterar a propriedade quando sair do foco do input -->
-        <input id="url" v-model.lazy="foto.url" autocomplete="off">
+        <input data-vv-as="Url" name="url" v-validate data-vv-rules="required" id="url" v-model="foto.url" autocomplete="off">
+        <span class="erro" v-show="errors.has('url')">{{errors.first('url')}}</span>
         <!-- neste caso com o v-show, a imagem só será carregada quando tiver valor da url -->
         <imagem-responsiva v-show="foto.url" :url="foto.url" :titulo="foto.titulo"/>
       </div>
@@ -64,19 +66,32 @@ export default {
   methods: {
 
     gravar() {
-      
-      this.fotoService
-        .cadastraOuAltera(this.foto)
-        .then(() => {
 
-          //se já tiver id, é pq se trata de uma alteração, então volta para pagina home
-          if(this.id){
-            this.$router.push({name: 'home'});
+      // acessa o validador e verifica todas as validaçoes do componente
+      this.$validator
+        .validateAll()
+        .then(sucessoNasValidacoes => {
+
+          // se tiver sucesso, quer dizer q pode seguir em frente
+          if(sucessoNasValidacoes){
+
+            this.fotoService
+              .cadastraOuAltera(this.foto)
+              .then(() => {
+      
+                //se já tiver id, é pq se trata de uma alteração, então volta para pagina home
+                if(this.id){
+                  this.$router.push({name: 'home'});
+                }
+      
+                this.foto = new Foto();
+      
+                }, err => console.log(err));
+
           }
 
-          this.foto = new Foto();
-
-          }, err => console.log(err));
+        });
+      
 
     }
   },
@@ -118,6 +133,10 @@ export default {
 
   .centralizado {
     text-align: center;
+  }
+
+  .erro {
+    color: red;
   }
 
 </style>
