@@ -2,7 +2,12 @@
 
   <div>
     <h1 class="centralizado">Cadastro</h1>
-    <h2 class="centralizado"></h2>
+
+    <div>
+      <!-- usando diretiva v-if, caso a condiçao seja true, inclui no dom, caso contrario como abaixo mostra outro -->
+      <h2 v-if="foto._id" class="centralizado">Alterando</h2>
+      <h2 v-else class="centralizado">Incluindo</h2>
+    </div>
 
     <form @submit.prevent="gravar()">
       <div class="controle">
