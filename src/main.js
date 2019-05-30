@@ -13,6 +13,7 @@ import { routes } from "./routes";
 import './directives/Transform';
 
 import 'bootstrap/dist/css/bootstrap.css';
+import './assets/css/teste.css';
 
 // registrando o uso da dependência
 Vue.use(VueResource);
