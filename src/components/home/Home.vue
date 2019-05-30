@@ -25,6 +25,10 @@
               :url="foto.url"
               :titulo="foto.titulo"
             />
+            <!-- redirecionando para a rota conforme o nome definido e o id especificado no endpoint (/cadastro/:id) -->
+            <router-link :to="{name: 'alterar', params: { id: foto._id } }">
+              <meu-botao tipo="button" rotulo="ALTERAR"/>
+            </router-link>
             <!-- na passagem de parametros para as propriedades do componente, usa se ":" quando não quer passar apenas string -->
             <meu-botao
               tipo="button"
@@ -45,7 +49,7 @@ import Painel from "../shared/painel/Painel.vue";
 import ImagemResponsiva from "../shared/imagem-responsiva/ImagemResponsiva.vue";
 import Botao from "../shared/botao/Botao.vue";
 
-import FotoService from '../../domain/foto/FotoService';
+import FotoService from "../../domain/foto/FotoService";
 
 export default {
   // registrando os componentes que serão usados
@@ -66,9 +70,7 @@ export default {
 
   methods: {
     remove(foto) {
-
-      this.fotoService.apaga(foto._id )
-      .then(
+      this.fotoService.apaga(foto._id).then(
         () => {
           this.mensagem = "Foto removida com sucesso!!";
 
@@ -98,15 +100,13 @@ export default {
   },
 
   created() {
-
     //criando uma propriedade dinamicamente
     this.fotoService = new FotoService(this.$resource);
 
-      this.fotoService
+    this.fotoService
       .lista()
       // como ainda retorna uma promise, busco as fotos, imprimindo no log caso der erro
       .then(fotos => (this.fotos = fotos), err => console.log(err));
-
   }
 };
 </script>
