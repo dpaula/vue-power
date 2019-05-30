@@ -16,7 +16,8 @@ import Menu from "./components/shared/menu/Menu.vue"
 export default {
   data() {
     return {
-      routes
+      //definindo um filtro das rotas para carregar a propriedade routes, somente as rotas que tiver menu = true
+      routes : routes.filter(route => route.menu)
     };
   }, 
 
