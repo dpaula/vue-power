@@ -72,15 +72,12 @@ export default {
     remove(foto) {
       this.fotoService.apaga(foto._id).then(
         () => {
-          this.mensagem = "Foto removida com sucesso!!";
-
           // atualiza a lista de fotos, sem precisar revisitar o servidor
           let indice = this.fotos.indexOf(foto);
           this.fotos.splice(indice, 1);
         },
         err => {
-          console.log(err);
-          this.mensagem = "Não foi possível remover a foto";
+          this.mensagem = err.message;
         }
       );
     }
@@ -106,7 +103,7 @@ export default {
     this.fotoService
       .lista()
       // como ainda retorna uma promise, busco as fotos, imprimindo no log caso der erro
-      .then(fotos => (this.fotos = fotos), err => console.log(err));
+      .then(fotos => (this.fotos = fotos), err => this.mensagem = err.message);
   }
 };
 </script>
