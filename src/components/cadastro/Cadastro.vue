@@ -61,8 +61,17 @@ export default {
     gravar() {
       
       this.fotoService
-        .cadastra(this.foto)
-        .then(() => this.foto = new Foto(), err => console.log(err));
+        .cadastraOuAltera(this.foto)
+        .then(() => {
+
+          //se já tiver id, é pq se trata de uma alteração, então volta para pagina home
+          if(this.id){
+            this.$router.push({name: 'home'});
+          }
+
+          this.foto = new Foto();
+
+          }, err => console.log(err));
 
     }
   },

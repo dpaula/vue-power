@@ -17,8 +17,16 @@ export default class FotoService {
             .then(res => res.json())
     }
 
-    cadastra(foto) {
+    cadastraOuAltera(foto) {
+
+        if (foto._id) {
+            return this._resource
+                // equivalente ao PUT
+                .update({ id: foto._id }, foto);
+        }
+
         return this._resource
+            // equivalente ao POST
             .save(foto);
     }
 
