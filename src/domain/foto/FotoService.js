@@ -27,4 +27,10 @@ export default class FotoService {
         return this._resource
             .delete({ id });
     }
+
+    busca(id) {
+        return this._resource
+            .get({ id })
+            .then(res => res.json());
+    }
 }

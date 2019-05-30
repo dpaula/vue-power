@@ -50,7 +50,9 @@ export default {
 
   data() {
     return {
-      foto: new Foto()
+      foto: new Foto(),
+      //busca o parametro definido na rota (/cadastro/:id')
+      id: this.$route.params.id
     }
   },
 
@@ -69,6 +71,12 @@ export default {
 
     //criando uma propriedade dinamicamente
     this.fotoService = new FotoService(this.$resource);
+
+    if(this.id){
+      this.fotoService
+        .busca(this.id)
+        .then(foto => this.foto = foto, err => console.log('Erro', err));
+    }
   }
 }
 
