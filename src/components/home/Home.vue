@@ -45,6 +45,8 @@ import Painel from "../shared/painel/Painel.vue";
 import ImagemResponsiva from "../shared/imagem-responsiva/ImagemResponsiva.vue";
 import Botao from "../shared/botao/Botao.vue";
 
+import FotoService from '../../domain/foto/FotoService';
+
 export default {
   // registrando os componentes que serão usados
   components: {
@@ -65,8 +67,7 @@ export default {
   methods: {
     remove(foto) {
 
-      //definindo o id como chave que será associada ao _id
-      this.resource.delete({ id: foto._id })
+      this.fotoService.apaga(foto._id )
       .then(
         () => {
           this.mensagem = "Foto removida com sucesso!!";
@@ -99,13 +100,10 @@ export default {
   created() {
 
     //criando uma propriedade dinamicamente
-    //definindo meu end point para o recurso fotos, com o id que será usado como chave
-    this.resource = this.$resource('v1/fotos{/id}');
+    this.fotoService = new FotoService(this.$resource);
 
-    this.resource
-      .query()
-      // como retorna uma promise, busco resposta, que é um json
-      .then(res => res.json())
+      this.fotoService
+      .lista()
       // como ainda retorna uma promise, busco as fotos, imprimindo no log caso der erro
       .then(fotos => (this.fotos = fotos), err => console.log(err));
 
